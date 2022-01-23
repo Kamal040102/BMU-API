@@ -1,0 +1,35 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.center{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.option a{
+    margin:0px 20px;
+}
+
+.login div{
+    margin: 10px 0 15px 0;
+}
+
+.submit input{
+    width:100%;
+}
+
+.register div{
+    margin: 10px 0 15px 0;
+}
+
+.response{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}

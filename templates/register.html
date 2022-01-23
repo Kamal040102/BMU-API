@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | BMU API</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="center">
+        <h2>Register</h2>
+        <div class="register">
+            <form action="/register" method="post">
+                <div class="username">
+                    Username:
+                    <input type="text" name="username" id="username" placeholder="Username" autocomplete="off">
+                </div>
+                <div class="email">
+                    Email:
+                    <input type="email" name="email" id="email" placeholder="Email" autocomplete="off">
+                </div>
+                <div class="password">
+                    Password:
+                    <input type="password" name="password" id="password" placeholder="Password" autocomplete="off">
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+        <div class="response">
+            {% if userStat %}
+            <h5>Your registration is Successful.</h5>
+            <h6>You may now proceed for login.</h6>
+            {% endif %}
+        </div>
+        <div class="option">
+            <a href="/">Home</a>
+        </div>
+    </div>
+</body>
+</html>
