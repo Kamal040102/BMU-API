@@ -41,8 +41,12 @@ def register():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        SQLHandler.insertUser(username, email, password)
-        userStat = True
+        retypePassword = request.form['retype-password']
+        if password == retypePassword:
+            SQLHandler.insertUser(username, email, password)
+            userStat = True
+        else:
+            userStat = False
 
         return render_template("register.html", userStat = userStat)
 

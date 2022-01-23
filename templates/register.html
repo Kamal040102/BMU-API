@@ -24,15 +24,22 @@
                     Password:
                     <input type="password" name="password" id="password" placeholder="Password" autocomplete="off">
                 </div>
+                <div class="password">
+                    Re-type Password:
+                    <input type="password" name="retype-password" id="retype-password" placeholder="Password" autocomplete="off">
+                </div>
                 <div class="submit">
                     <input type="submit" value="Submit">
                 </div>
             </form>
         </div>
         <div class="response">
+            <h4>Note:</h4>
             {% if userStat %}
             <h5>Your registration is Successful.</h5>
             <h6>You may now proceed for login.</h6>
+            {% else %}
+            <h5>Password Not Matching, Retry.</h5>
             {% endif %}
         </div>
         <div class="option">
