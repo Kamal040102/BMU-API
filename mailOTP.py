@@ -6,7 +6,7 @@ from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
 import os
 
-AUTH_DETAIL_PATH = os.path(".env")
+AUTH_DETAIL_PATH = os.path.join(".env")
 load_dotenv(AUTH_DETAIL_PATH)
 SENDER_EMAIL = os.getenv("EMAIL")
 SENDER_PASSWORD = os.getenv("PASSWORD")
