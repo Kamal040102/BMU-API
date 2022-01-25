@@ -3,6 +3,13 @@ import string
 import random
 import smtplib
 from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
+import os
+
+AUTH_DETAIL_PATH = os.path(".env")
+load_dotenv(AUTH_DETAIL_PATH)
+SENDER_EMAIL = os.getenv("EMAIL")
+SENDER_PASSWORD = os.getenv("PASSWORD")
 
 def createSendOTP(username, email):
    lower = string.ascii_lowercase
@@ -11,9 +18,9 @@ def createSendOTP(username, email):
    var = lower + upper + num
    code = ''.join(random.sample(var,6))
 
-   sender = "coding.coding.everyday@gmail.com"
+   sender = SENDER_EMAIL
    receiver = email
-   password = 'missajibsharma040102'
+   password = SENDER_PASSWORD
 
    message = f'''
    <html>
