@@ -1,0 +1,1 @@
+create table registrationdb (sessionID varchar(50) not null primary key unique, username varchar(50) not null unique, email varchar(50) not null, password varchar(50) not null, tempOTP varchar(6) not null)

@@ -1,16 +1,19 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask import render_template
 from flask import request
+import registrationModel
+import mailOTP
 import Scraper
 import models as SQLHandler
+import SessionID
 
 app = Flask(__name__)
+sessionID = SessionID.createSessionID()
 
 @app.route("/", methods=['GET', 'POST'])
 def root():
     if request.method == 'GET':
-        res = Scraper.scrapCircular()
-        return render_template("index.html", res = res)
+        return render_template("index.html")
 
 @app.route("/login", methods=['GET','POST'])
 def login():
@@ -41,16 +44,48 @@ def register():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        retypePassword = request.form['retype-password']
-        if password == retypePassword:
-            SQLHandler.insertUser(username, email, password)
-            userStat = True
+        otp, res = mailOTP.createSendOTP(username, email)
+        details = registrationModel.retrieveTempDetails()
+        alreadyExist= False
+        for i in range(len(details)):
+            if username  == details[i][1]:
+                alreadyExist = True
+                break
+            else:
+                alreadyExist = False
+                continue
+        if alreadyExist:
+            registrationModel.updateTempDetails(otp, sessionID,username)
         else:
-            userStat = False
+            registrationModel.insertTempDetails(sessionID, username, email, password, otp)
+        return render_template("verification.html", res=res, username=username, email=email, otp=otp)
 
-        return render_template("register.html", userStat = userStat)
+@app.route("/verification", methods=['GET','POST'])
+def verification(): 
+    if request.method == 'GET':
+        return render_template("verification.html")
+    elif request.method == 'POST':
+        userOTP = request.form['otp']
+        tempDetail = registrationModel.retrieveTempDetails()
+        for i in range(len(tempDetail)):
+            if sessionID == tempDetail[i][0]:
+                usernameTemp = tempDetail[i][1]
+                emailTemp = tempDetail[i][2]
+                passwordTemp = tempDetail[i][3]
+                otpTemp = tempDetail[i][4]
+                break
+            else:
+                continue
 
-@app.route("/api", methods=['GET', 'POST'])
+        if userOTP == otpTemp:
+            SQLHandler.insertUser(usernameTemp, emailTemp, passwordTemp)
+            registrationModel.deleteTempDetails(usernameTemp)
+            return render_template("verified.html")
+        else:
+            regis = False
+            return redirect(url_for("register"))
+
+@app.route("/api", methods=['GET'])
 def scrap():
     key = request.args.get('key')
     if request.method == 'GET':

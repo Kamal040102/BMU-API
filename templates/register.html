@@ -14,36 +14,28 @@
             <form action="/register" method="post">
                 <div class="username">
                     Username:
-                    <input type="text" name="username" id="username" placeholder="Username" autocomplete="off">
+                    <input type="text" name="username" id="username" placeholder="Username" autocomplete="off" required>
                 </div>
                 <div class="email">
                     Email:
-                    <input type="email" name="email" id="email" placeholder="Email" autocomplete="off">
+                    <input type="email" name="email" id="email" placeholder="Email" autocomplete="off" required>
                 </div>
                 <div class="password">
                     Password:
-                    <input type="password" name="password" id="password" placeholder="Password" autocomplete="off">
+                    <input type="password" name="password" id="password" placeholder="Password" autocomplete="off" required>
                 </div>
                 <div class="password">
                     Re-type Password:
-                    <input type="password" name="retype-password" id="retype-password" placeholder="Password" autocomplete="off">
+                    <input type="password" name="retype-password" id="retype-password" placeholder="Password" autocomplete="off" required>
                 </div>
                 <div class="submit">
                     <input type="submit" value="Submit">
                 </div>
             </form>
         </div>
-        <div class="response">
-            <h4>Note:</h4>
-            {% if userStat %}
-            <h5>Your registration is Successful.</h5>
-            <h6>You may now proceed for login.</h6>
-            {% else %}
-            <h5>Password Not Matching, Retry.</h5>
-            {% endif %}
-        </div>
         <div class="option">
             <a href="/">Home</a>
+            <a href="/login">Login</a>
         </div>
     </div>
 </body>
