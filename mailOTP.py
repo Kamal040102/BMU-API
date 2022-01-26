@@ -54,7 +54,7 @@ def createSendOTP(username, email):
       smtpObj.ehlo()
       smtpObj.login(sender, password)
       smtpObj.sendmail(sender, receiver, msg.as_string())    
-      res = f"Mail has been sent Successfully on email {email}"   
+      res = f"OTP has been sent Successfully"   
       smtpObj.quit()
    except Exception as e:
       res = f"Exception: {e}"
