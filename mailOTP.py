@@ -48,7 +48,7 @@ def createSendOTP(username, email):
    msg.attach(body)
  
    try:
-      smtpObj = smtplib.SMTP('smtp.gmail.com',587)
+      smtpObj = smtplib.SMTP('smtp.mail.yahoo.com',587)
       smtpObj.ehlo()
       smtpObj.starttls()
       smtpObj.ehlo()
@@ -61,4 +61,4 @@ def createSendOTP(username, email):
 
    return code, res
 
-# createSendOTP("kamal","kamal5201ks@gmail.com")
+# print(createSendOTP("kamal","kamal5201ks@gmail.com"))
