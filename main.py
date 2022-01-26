@@ -15,8 +15,8 @@ def root():
     try:
         if request.method == 'GET':
             return render_template("index.html")
-    except:
-        return render_template("exception.html")
+    except Exception as e:
+        return render_template("exception.html", e = e)
 
 @app.route("/login", methods=['GET','POST'])
 def login():
@@ -38,8 +38,8 @@ def login():
                     key = "public"
                     continue
             return  render_template("login.html", loginStat = loginStat, key = key)
-    except:
-        return render_template("exception.html")
+    except Exception as e:
+        return render_template("exception.html", e=e)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -65,8 +65,8 @@ def register():
             else:
                 registrationModel.insertTempDetails(sessionID, username, email, password, otp)
             return render_template("verification.html", res=res, username=username, email=email, otp=otp)
-    except:
-        return render_template("exception.html")
+    except Exception as e:
+        return render_template("exception.html", e=e)
 
 @app.route("/verification", methods=['GET','POST'])
 def verification(): 
@@ -93,8 +93,8 @@ def verification():
             else:
                 regis = False
                 return redirect(url_for("register"))
-    except:
-        return render_template("exception.html")
+    except Exception as e:
+        return render_template("exception.html", e=e)
 
 @app.route("/api", methods=['GET'])
 def scrap():
